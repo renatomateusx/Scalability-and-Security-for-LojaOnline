@@ -72,3 +72,121 @@ LojaOnline now operates with the confidence that its website can grow alongside 
    
    2. Click on the Create launch template button. 
 
+   3. Under Launch template name and description section: <br>
+
+      Launch template name: Enter labsLC <br>
+      Leave other options as default. <br>
+      
+   4. Under Launch template contents: <br>
+
+      Select Amazon Linux from the Quick Start <br>
+      Amazon machine image (AMI): Select Amazon Linux 2 AMI (HVM), SSD Volume Type <br>
+
+   5. Under Instance type: <br>
+
+      Select t2.micro from the below list.
+      
+   6. Key pair (Login): Select Keep it as default
+
+   7. Security groups: Select My-SG from the list <br>
+
+         Leave all other options as default. <br> 
+         Expand the option of Advanced details, Go to the User data, and paste the below script.  <br>
+
+         ```
+            #!/bin/bash
+            
+            sudo su
+            
+            yum update -y
+            yum install -y httpd
+            
+            systemctl start httpd
+            systemctl enable httpd
+            
+            echo "<html> <h1> Hello from Renato's Lab!! </h1> </html>" > /var/www/html/index.html
+
+         ```
+   **Task 4:** Create Targte group and Load Balancer 
+   
+      1. In the EC2 console, navigate to Target Groups from the left navigation panel. 
+      
+      2. Click on Create Target Group button. 
+
+      3. Target Type: Select Instances 
+
+            Name: Enter web-server-TG 
+            Protocol: Choose HTTP 
+            Port : Enter 80 
+      
+      4. Health check: 
+      
+            Protocol: Select HTTP 
+            Path: Enter /index.html 
+
+      5. Click on the Next button. 
+
+      6. Leave this page as default and click on Create target group button. 
+
+      7. Now to create a Load balancer. 
+
+      8. In the EC2 console, navigate to Load balancers in the left-side panel. 
+
+      9. Click on Create load balancer button at the top-left to create a new load balancer for our web servers.
+
+      10. On the next screen, choose Create button under Application Load Balancer since we are testing the high availability of the web application. 
+
+      11. Basic configuration: 
+      
+            Name: Enter Web-server-LB 
+            Scheme: Select Internet-facing 
+            IP address type: Choose IPv4  
+
+      12. Availability Zones 
+
+            VPC: Choose Default 
+            Availability Zones  : Select us-east-1a and us-east-1b. 
+
+      13. Security Groups: 
+
+            Remove the default one and choose My-SG 
+
+      14. In the listener part select the Target group that you have created earlier. 
+
+      15. Click on Create Load Balancer button. 
+
+      16. You have successfully created the Application Load balancer. 
+      
+      17. Wait for 2 to 3 minutes for the load balancer to become Active. 
+
+   **Task 5:** Create an Auto Scaling Group 
+   
+      1. An Auto Scaling group is a scalable collection of EC2 instances. When you create an Auto Scaling group, you include information such as the subnets for the instances and the number of instances the group must maintain at all times. 
+      
+      2. Go to the left menu under EC2 and choose Auto Scaling Groups under Auto Scaling. 
+      
+      3. Click on the Create Auto Scaling group button. 
+
+      4. Step 1 : Choose launch template or configuration 
+
+         Auto Scaling group name : Enter My-ASG 
+         Select the Launch template labsLC from the list and click on the Next button. 
+
+      5. Step 2: Configure settings 
+
+         VPC: Select the Default VPC from the list. 
+         Subnet: Select Subnet of us-east-1a and us-east-1b 
+         Click on the Next button. 
+
+      6. Step 3: Configure advanced options 
+
+         Load balancing - optional: Attach to an existing load balancer 
+         Attach to an existing load balancer: Choose from your load balancer target groups 
+         Existing load balancer target groups: web-server-TG 
+
+      7. Health check - optional:  
+
+         Health check type: EC2 (default) and Check the Turn on Elastic Load Balancing health checks checkbox. 
+         Health check grace period: 60 seconds
+         
+      8. Click on the Next button. 
