@@ -190,3 +190,149 @@ LojaOnline now operates with the confidence that its website can grow alongside 
          Health check grace period: 60 seconds
          
       8. Click on the Next button. 
+
+      9. Step 4: Configure group size and scaling policies 
+
+         Under Group size - optional 
+         Desired capacity : Enter 1 
+         Minimum capacity : Enter 1 
+         Maximum capacity : Enter 2 
+
+         Under Scaling policies - optional 
+         Select Target tracking scaling policy 
+         Scaling policy name: Target tracking policy 
+         Metric value: Average CPU Utilization 
+         Target value:Enter 30 
+         Instance need: 60 seconds warm up before including in metric 
+
+      10. Step 5: Add notifications 
+
+         Click on Add Notification button 
+         For SNS Topic creation click on Create a Topic button 
+         Send a notification to : Enter mytopic 
+         With these recipients : Enter your email id 
+         Click on Next button 
+
+      11. Step 6: Add tags : Not needed for now just click on Next button 
+
+      12. Now Review, scroll down and click on the Create Auto Scaling Group button. 
+      
+      13. You will be redirected to the autoscaling group page, you will be able to see that one instance is launched by the autoscaling group. 
+      
+      14. Now go to the EC2 instances list. You will see that there is one running instance (which were created by your autoscaling group). 
+
+      15. Check Your Email and confirm the SNS Subscriptions to get the email notifications. 
+
+   **Task 6:** Testing the Load Balancer  
+   
+         1. In the EC2 console, navigate to Load balancers in the left-side panel. 
+         
+         2. Copy the DNS of your load balancer, and paste it into the browser. 
+         
+         3. You will see the web page hosted. 
+
+   **Task 7:** Create an IP Set 
+   
+         1. Click on services and select WAF & Shield under the Security, Identity, & Compliance section. 
+         
+         2. On the left side, you will be able to see the IP sets menu. Click on IP sets and click on Create IP sets. 
+
+         3. On the next screen, fill out the following details under Create IP set. 
+
+         4. IP set details: 
+         
+               IP set name: Enter MyIPset 
+               Description: Enter IP set to block my public IP 
+               Region: Select US EAST (N.Virginia) 
+               IP Version: Select IPv4 
+               IP address: Enter the IP of your local network/32 from https://www.whatismyip.com/. 
+
+
+   **Task 8:** Create a Web ACL 
+   
+         1. Navigate to the AWS WAF dashboard and select Web ACLs. Click on Create web ACL to create a new web ACL. 
+         
+         2. Configure the ACL as below: 
+         
+               Resource type: Select Regional resources  (Application Load Balancer and API Gateway)   
+               Region: Select US EAST (N.Virginia) 
+               Name: Enter MywebACL 
+               Description: Enter ACL to block my public IP 
+
+         3. To associate an AWS resource, click on Add AWS resources 
+
+         4. In Add AWS resources select Application Load Balancer and select the name of ALB. Click on Add 
+
+         5. Lastly, click on the Next button 
+
+         6. Add rules and rule groups 
+         
+         7. Under Rules click on Add rule and select  Add my own rules and rule groups in the drop-down menu. 
+
+         8. Rule type: Select IP set  
+
+         9. Name: Enter MywebACL-rule 
+
+         10. IP set:  select the IP set created Above ( MyIPset ) 
+
+         11. IP address to use as the originating address: Source IP address 
+         
+         12. Action: Select Block 
+         
+         13. Once you provide the above details, click on the Add rule. 
+
+         14. Lastly, click on the Next button 
+
+         15. Set rule priority 
+         
+               Leave as default and click on Next. 
+               
+         16. Configure metrics 
+         
+               Leave as default and click on Next. 
+         
+         17. Review and create web ACL 
+         
+               Review all your inputs and click on Create web ACL 
+               
+         18. Wait for 1 or 2 minutes until you will see that your web ACL is successfully created. 
+
+   **Task 9:** Testing the working of the WAF 
+   
+         1. To test the WAF, navigate  to Load Balancers from the EC2 left menu under the sub-heading Load balancing 
+         
+         2. Under the Load balancer section, select the Application load balancer Web-server-LB. 
+         
+         3. Copy the DNS name Under details scroll down you will be able to see the DNS name copy it and paste it in your desired browser.  
+         
+               Example: web-server-lb-1903855210.us-east-1.elb.amazonaws.com 
+               
+         4. You will get a 403 forbidden error showing that WAF blocked your connection to ALB. 
+
+   **Task 10:** Create a CLoudWatch Dashboard 
+   
+         1. Make sure you are in the N.Virginia Region. 
+         
+         2. Navigate to CloudWatch by clicking on the Services menu available under the Management & Governance section. 
+         
+         3. Click on Dashboard in the left panel of the CloudWatch page. 
+         
+         4. Click on Create dashboard button.  
+
+         5. Give a name to your dashboard. 
+
+            Dashboard name: Enter MyDashboard 
+            Click on Create dashboard button. 
+
+         6. We have to select a widget type to configure and add to this dashboard.  
+
+            Data type : Select Metrices 
+            Widget type: Select Line 
+
+         7. Click on Next button. 
+
+         8. You will see a metric graph. Under All metrics, search and choose EC2-> By Auto Scaling Group. 
+         
+         9. Now Search for your autoscaling group which we created i.e. My-ASG in the search bar and select the CPUUtilization from the metrics and click on Create Widget button.
+
+         10. You can Monitor the System Performance using the Graph.. 
