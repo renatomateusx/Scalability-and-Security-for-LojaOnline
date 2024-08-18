@@ -1,4 +1,4 @@
-# Scalability and Security for LojaOnline]
+# Scalability and Security for LojaOnline
 
 # Project: Scalability and Security for LojaOnline
 
