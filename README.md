@@ -36,3 +36,7 @@ LojaOnline now operates with the confidence that its website can grow alongside 
 
 
 ![Architecture Diagram](https://github.com/renatomateusx/Scalability-and-Security-for-LojaOnline/blob/master/Scalability-and-Security-for-LojaOnline-arch.png)
+
+## Steps to reproduce the result
+
+
