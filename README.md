@@ -45,21 +45,30 @@ LojaOnline now operates with the confidence that its website can grow alongside 
 
 **Task 2:** Create a Security Group 
 
-1. Make sure you are in the N.Virginia Region. 
+   1. Make sure you are in the N.Virginia Region. 
+   
+   2. Navigate to EC2 by clicking on the Services menu available under the Compute section. 
+   
+   3. On the left panel menu, select the Security Groups under the Network & Security section. 
+   
+   4. Click on the Create security group button.
+   
+   5. Under Basic details:  <br> 
+   
+      Security group name: Enter My-SG <br>
+      Description: Enter Security group for Load balancer and Launch Template  <br>
+      VPC: Select Default VPC <br>
+   
+   6. Click on the Add rule button under Inbound rules.  <br>
+   
+      Type : Select HTTP  <br>
+      Source : Select Anywhere Ipv4  <br>
+   
+   7. Leave everything as default and click on the Create security group button. <br>
 
-2. Navigate to EC2 by clicking on the Services menu available under the Compute section. 
+**Task 3:** Create a Launch Template 
 
-3. On the left panel menu, select the Security Groups under the Network & Security section. 
+   1. In the left navigation pane (scroll down) within Instances, click on the Launch templates. 
+   
+   2. Click on the Create launch template button. 
 
-4. Click on the Create security group button.
-
-5. Under Basic details:  <br> <br>
-
-   Security group name: Enter My-SG <br>
-   Description: Enter Security group for Load balancer and Launch Template  <br>
-   VPC: Select Default VPC <br>
-
-7. Click on the Add rule button under Inbound rules.  <br> <br>
-
-   Type : Select HTTP  <br>
-   Source : Select Anywhere Ipv4  <br>
