@@ -39,4 +39,20 @@ LojaOnline now operates with the confidence that its website can grow alongside 
 
 ## Steps to reproduce the result
 
+## Project Steps
+**Task 1:** Sign in to AWS Management Console
+Click on the Open Console  button, and you will get redirected to AWS Console in a new browser tab.
+On the AWS sign-in page, 
+Leave the Account ID as default. Never edit/remove the 12-digit Account ID present in the AWS Console. otherwise, you cannot proceed with the project.
+Now copy your Username and Password in the Project Console to the IAM Username and Password in AWS Console and click on the Sign in button.
+Once Signed in to the AWS Management Console, Make the default AWS Region as US East (N. Virginia) us-east-1.
 
+**Task 2:** Create a Security Group 
+
+1. Make sure you are in the N.Virginia Region. 
+
+2. Navigate to EC2 by clicking on the Services menu available under the Compute section. 
+
+3. On the left panel menu, select the Security Groups under the Network & Security section. 
+
+4. Click on the Create security group button. 
