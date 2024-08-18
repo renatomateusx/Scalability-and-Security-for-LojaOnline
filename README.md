@@ -53,13 +53,13 @@ LojaOnline now operates with the confidence that its website can grow alongside 
 
 4. Click on the Create security group button.
 
-5. Under Basic details: 
+5. Under Basic details:  <br> <br>
 
-   Security group name: Enter My-SG 
-   Description: Enter Security group for Load balancer and Launch Template 
-   VPC: Select Default VPC
+   Security group name: Enter My-SG <br>
+   Description: Enter Security group for Load balancer and Launch Template  <br>
+   VPC: Select Default VPC <br>
 
-7. Click on the Add rule button under Inbound rules. 
+7. Click on the Add rule button under Inbound rules.  <br> <br>
 
-   Type : Select HTTP 
-   Source : Select Anywhere Ipv4 
+   Type : Select HTTP  <br>
+   Source : Select Anywhere Ipv4  <br>
